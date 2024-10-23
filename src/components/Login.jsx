@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import toast, { Toaster } from 'react-hot-toast';
 
 import { BASE_URL } from '../utils/constants';
+import { showToast } from '../utils/showToast';
 
 import { useDispatch } from 'react-redux';
 import { addUser } from '../redux/slices/userSlice';
 
 const Login = () => {
     const navigate = useNavigate();
-
-    const notifyErrorMessage = (errorMessage) => toast.error(errorMessage);
 
     const [formData, setFormData] = useState({
         emailId: "shreyasprabhu26@gmail.com",
@@ -40,7 +38,7 @@ const Login = () => {
             return navigate("/feed");
 
         } catch (error) {
-            notifyErrorMessage(error?.response?.data?.message || "Something went wrong!")
+            showToast("error", error?.response?.data?.message || "Something went wrong!")
         }
     }
 
@@ -88,10 +86,6 @@ const Login = () => {
                     />
                 </label>
                 <button type='submit' onSubmit={handleLogin} className="btn btn-success">Submit</button>
-                <Toaster
-                    position="top-right"
-                    reverseOrder={false}
-                />
             </form>
         </>
     );
