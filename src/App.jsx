@@ -1,4 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast';
+
 import './App.css'
 
 import Body from './components/Body'
@@ -12,6 +14,10 @@ function App() {
 
   return (
     <>
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+      />
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
