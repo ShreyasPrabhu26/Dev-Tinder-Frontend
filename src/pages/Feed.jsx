@@ -8,24 +8,27 @@ import { addFeed } from '../redux/slices/feedSlice';
 
 import { showToast } from '../utils/showToast';
 
-import UserCard from './UserCard';
-import Loader from './Loader';
+import UserCard from '../components/UserCard';
+import Loader from '../components/Loader';
 
 const Feed = () => {
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     const feed = useSelector((store) => store.feed);
     const dispatch = useDispatch();
 
     const getFeed = async () => {
         if (feed) return;
+        setIsLoading(true)
         try {
             const response = await axios.get(`${BASE_URL}/user/feed`, { withCredentials: true });
             dispatch(addFeed(response.data));
             setIsLoading(false);
         } catch (error) {
-            console.log(error);
+            console.error(error);
             showToast("error", error?.response?.data?.message || "Something went wrong!")
+        } finally {
+            setIsLoading(false);
         }
     }
 

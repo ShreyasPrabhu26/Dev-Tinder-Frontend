@@ -3,9 +3,9 @@ import { Toaster } from 'react-hot-toast';
 
 import './App.css'
 
-import Body from './components/Body'
-import Login from './components/Login'
-import Feed from './components/Feed'
+import Body from './pages/Body'
+import Login from './pages/Login'
+import Feed from './pages/Feed'
 
 import { store } from './redux/appStore'
 import { Provider } from 'react-redux'

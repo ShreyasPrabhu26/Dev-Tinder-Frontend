@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import axios from 'axios'
 import { Outlet, useNavigate } from 'react-router-dom'
 
-import NavBar from './NavBar'
-import Footer from './Footer'
+import NavBar from '../components/NavBar'
+import Footer from '../components/Footer'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { BASE_URL } from '../utils/constants'
