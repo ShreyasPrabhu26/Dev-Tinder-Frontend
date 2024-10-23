@@ -1,11 +1,15 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../redux/slices/userSlice';
 
 const Login = () => {
     const [formData, setFormData] = useState({
         emailId: '',
         password: ''
     });
+
+    const dispatch = useDispatch();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -22,7 +26,8 @@ const Login = () => {
                 formData,
                 { withCredentials: true }
             )
-            console.log(response);
+            
+            dispatch(addUser((await response).data))
 
         } catch (error) {
             console.error(error);
