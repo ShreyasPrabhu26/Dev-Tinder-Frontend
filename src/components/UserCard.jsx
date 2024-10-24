@@ -1,8 +1,31 @@
 import React from 'react'
+import axios from 'axios';
+
+import { useDispatch } from 'react-redux';
+import { removeUserFromFeed } from '../redux/slices/feedSlice';
+
+import { showToast } from '../utils/showToast';
+import { BASE_URL } from '../utils/constants';
 
 const UserCard = ({ user, isProfileEdit = false }) => {
-    const { firstName, lastName, photoUrl, age, gender, about } = user;
+    const dispatch = useDispatch()
+    const { _id, firstName, lastName, photoUrl, age, gender, about } = user;
     const fullName = `${firstName} ${lastName}`;
+
+    const handleSendRequest = async (status, userId) => {
+        try {
+            const res = await axios.post(
+                `${BASE_URL}/request/send/${status}/${userId}`,
+                {},
+                { withCredentials: true }
+            );
+            dispatch(removeUserFromFeed(userId));
+        } catch (error) {
+            showToast("error", error?.message)
+        }
+    };
+
+
     return (
         <div className="card bg-base-100 w-96 shadow-xl mx-auto">
             <figure>
@@ -17,12 +40,20 @@ const UserCard = ({ user, isProfileEdit = false }) => {
                 <p>Age: {age}</p>
                 {!isProfileEdit &&
                     <div className="card-actions gap-10">
-                        <button className="btn btn-error">IGNORE</button>
-                        <button className="btn btn-success">INTRESTED</button>
+                        <button
+                            className="btn btn-error"
+                            onClick={() => handleSendRequest("ignore", _id)}>
+                            IGNORE
+                        </button>
+                        <button
+                            className="btn btn-success"
+                            onClick={() => handleSendRequest("intrested", _id)}>
+                            INTRESTED
+                        </button>
                     </div>
                 }
             </div>
-        </div >
+        </div>
     )
 }
 
