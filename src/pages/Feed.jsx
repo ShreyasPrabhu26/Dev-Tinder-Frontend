@@ -18,12 +18,11 @@ const Feed = () => {
     const dispatch = useDispatch();
 
     const getFeed = async () => {
-        if (feed) return;
+        if (feed?.length) return;
         setIsLoading(true)
         try {
             const response = await axios.get(`${BASE_URL}/user/feed`, { withCredentials: true });
             dispatch(addFeed(response.data));
-            setIsLoading(false);
         } catch (error) {
             console.error(error);
             showToast("error", error?.response?.data?.message || "Something went wrong!")
@@ -38,9 +37,18 @@ const Feed = () => {
 
     return (
         <div>
-            {isLoading ? <Loader /> : <UserCard user={feed[0]} />}
+            {isLoading ? (
+                <Loader />
+            ) : (
+                feed?.length ? (
+                    feed.map((user) => <UserCard key={user.id} user={user} />)
+                ) : (
+                    <p>No feed available</p>
+                )
+            )}
         </div>
-    )
+    );
+
 }
 
 export default Feed
