@@ -9,7 +9,10 @@ import Feed from './pages/Feed'
 
 import { store } from './redux/appStore'
 import { Provider } from 'react-redux'
+
 import EditProfile from './pages/EditProfile';
+import Connections from './pages/Connections';
+import Requests from './pages/Requests';
 
 function App() {
 
@@ -26,6 +29,8 @@ function App() {
               <Route path='/login' element={<Login />} />
               <Route path='/profile' element={<EditProfile />} />
               <Route path='/feed' element={<Feed />} />
+              <Route path='/connections' element={<Connections />} />
+              <Route path='/requests' element={<Requests />} />
             </Route>
           </Routes>
         </BrowserRouter>
