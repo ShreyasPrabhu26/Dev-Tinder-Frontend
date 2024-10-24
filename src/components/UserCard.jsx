@@ -1,6 +1,6 @@
 import React from 'react'
 
-const UserCard = ({ user }) => {
+const UserCard = ({ user, isProfileEdit = false }) => {
     const { firstName, lastName, photoUrl, age, gender, about } = user;
     const fullName = `${firstName} ${lastName}`;
     return (
@@ -14,12 +14,15 @@ const UserCard = ({ user }) => {
             <div className="card-body flex items-center justify-center">
                 <strong className="card-title">{fullName}</strong>
                 <p>{about}</p>
-                <div className="card-actions gap-10">
-                    <button className="btn btn-error">IGNORE</button>
-                    <button className="btn btn-success">INTRESTED</button>
-                </div>
+                <p>Age: {age}</p>
+                {!isProfileEdit &&
+                    <div className="card-actions gap-10">
+                        <button className="btn btn-error">IGNORE</button>
+                        <button className="btn btn-success">INTRESTED</button>
+                    </div>
+                }
             </div>
-        </div>
+        </div >
     )
 }
 

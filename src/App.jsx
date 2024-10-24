@@ -9,6 +9,7 @@ import Feed from './pages/Feed'
 
 import { store } from './redux/appStore'
 import { Provider } from 'react-redux'
+import EditProfile from './pages/EditProfile';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Body />}>
               <Route path='/login' element={<Login />} />
+              <Route path='/profile' element={<EditProfile />} />
               <Route path='/feed' element={<Feed />} />
             </Route>
           </Routes>
