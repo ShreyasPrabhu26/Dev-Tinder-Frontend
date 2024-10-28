@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { showToast } from '../utils/showToast';
 import { BASE_URL } from '../utils/constants';
@@ -8,6 +8,7 @@ import { addconnections } from '../redux/slices/connectionSlice';
 const Connections = () => {
     const connections = useSelector((store) => store.connections);
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(true);
 
     const fetchConnections = async () => {
         if (connections && connections.length) return;
@@ -16,6 +17,9 @@ const Connections = () => {
             dispatch(addconnections(response?.data?.data));
         } catch (error) {
             showToast("error", error?.message || "Something Went Wrong!");
+            console.error("Error fetching connections:", error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -26,28 +30,25 @@ const Connections = () => {
     return (
         <div className="text-center my-10">
             <h1 className="font-bold text-white text-3xl">Connections</h1>
-            {!connections ? (
+            {loading ? (
+                <p>Loading...</p>
+            ) : connections.length === 0 ? (
                 <p>No Connections!</p>
             ) : (
                 connections.map((connection) => {
                     const { _id, firstName, lastName, photoUrl, age, gender, about } = connection;
                     return (
-                        <div
-                            key={_id}
-                            className="flex m-4 p-4 rounded-lg bg-base-300 w-1/2 mx-auto"
-                        >
+                        <div key={_id} className="flex m-4 p-4 rounded-lg bg-base-300 w-1/2 mx-auto">
                             <div>
                                 <img
-                                    alt="photo"
+                                    alt={`${firstName} ${lastName}'s profile photo`}
                                     className="w-20 h-20 rounded-full object-cover"
                                     src={photoUrl}
                                 />
                             </div>
-                            <div className="text-left mx-4 ">
-                                <h2 className="font-bold text-xl">
-                                    {firstName + " " + lastName}
-                                </h2>
-                                {age && gender && <p>{age + ", " + gender}</p>}
+                            <div className="text-left mx-4">
+                                <h2 className="font-bold text-xl">{`${firstName} ${lastName}`}</h2>
+                                {age && gender && <p>{`${age}, ${gender}`}</p>}
                                 <p>{about}</p>
                             </div>
                         </div>
