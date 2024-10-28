@@ -25,7 +25,7 @@ const NavBar = () => {
             <div className="flex-1">
                 <Link to="/" className="btn btn-ghost text-xl">Dev Tinder</Link>
             </div>
-            {user &&
+            {user ?
                 <div className="flex-none gap-2">
                     <div className="dropdown dropdown-end flex items-center gap-4">
                         <p>Welcome, {user.firstName}</p>
@@ -57,6 +57,21 @@ const NavBar = () => {
                             <li><button onClick={handleLogout}>Logout</button></li>
                         </ul>
                     </div>
+                </div>
+                :
+                <div className="nav-buttons gap-7">
+                    <button
+                        className='bg-gray-600 p-2 rounded-md hover:scale-105 transition-all'
+                        onClick={() => navigator("/login")}
+                    >
+                        Login
+                    </button>
+                    <button
+                        className='bg-gray-600 p-2 rounded-md hover:scale-105 transition-all'
+                        onClick={() => navigator("/signup")}
+                    >
+                        Sign Up
+                    </button>
                 </div>
             }
         </div>
