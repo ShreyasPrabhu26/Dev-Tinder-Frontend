@@ -5,6 +5,7 @@ import './App.css'
 
 import Body from './pages/Body'
 import Login from './pages/Login'
+import SignUp from './pages/SignUp'
 import Feed from './pages/Feed'
 
 import { store } from './redux/appStore'
@@ -27,6 +28,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Body />}>
               <Route path='/login' element={<Login />} />
+              <Route path='/signup' element={<SignUp />} />
               <Route path='/profile' element={<EditProfile />} />
               <Route path='/feed' element={<Feed />} />
               <Route path='/connections' element={<Connections />} />
