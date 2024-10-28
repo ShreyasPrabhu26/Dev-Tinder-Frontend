@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-import { BASE_URL } from '../utils/constants';
+import { BASE_URL, DEFAULT_PROFILE_PICTURE } from '../utils/constants';
 import { showToast } from '../utils/showToast';
 
 import { useDispatch } from 'react-redux';
@@ -56,6 +56,7 @@ const SignUp = () => {
         e.preventDefault();
         try {
             formData.age = parseInt(formData.age)
+            formData.photoUrl = formData.photoUrl ? formData.photoUrl : DEFAULT_PROFILE_PICTURE
             const response = await axios.post(`${BASE_URL}/auth/signup`, formData, { withCredentials: true });
 
             dispatch(addUser(response.data));
