@@ -43,7 +43,9 @@ const Login = () => {
     }
 
     return (
-        <>
+        <div className='flex flex-col items-center justify-center my-7'>
+            <strong className='text-3xl'>Welcome to Dev-Tiner</strong>
+
             <form className="w-80 flex flex-col gap-4 mx-auto my-7" onSubmit={handleLogin}>
                 <label className="input input-bordered flex items-center gap-2">
                     <svg
@@ -57,6 +59,7 @@ const Login = () => {
                             d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
                     </svg>
                     <input
+                        autoFocus
                         type="text"
                         className="grow"
                         name="emailId"
@@ -87,7 +90,7 @@ const Login = () => {
                 </label>
                 <button type='submit' onSubmit={handleLogin} className="btn btn-success">Submit</button>
             </form>
-        </>
+        </div>
     );
 };
 
