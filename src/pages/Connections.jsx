@@ -16,8 +16,9 @@ const Connections = () => {
             const response = await axios.get(`${BASE_URL}/user/connections`, { withCredentials: true });
             dispatch(addconnections(response?.data?.data));
         } catch (error) {
-            showToast("error", error?.message || "Something Went Wrong!");
-            console.error("Error fetching connections:", error);
+            if (error?.status === 404) {
+                showToast("error", "No Connections Yet!");
+            } else showToast("error", error?.message || "Something Went Wrong!");
         } finally {
             setLoading(false);
         }
@@ -32,7 +33,7 @@ const Connections = () => {
             <h1 className="font-bold text-white text-3xl">Connections</h1>
             {loading ? (
                 <p>Loading...</p>
-            ) : connections.length === 0 ? (
+            ) : (!connections) ? (
                 <p>No Connections!</p>
             ) : (
                 connections.map((connection) => {
