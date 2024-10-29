@@ -8,11 +8,12 @@ import { addconnections } from '../redux/slices/connectionSlice';
 const Connections = () => {
     const connections = useSelector((store) => store.connections);
     const dispatch = useDispatch();
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const fetchConnections = async () => {
         if (connections && connections.length) return;
         try {
+            setLoading(true);
             const response = await axios.get(`${BASE_URL}/user/connections`, { withCredentials: true });
             dispatch(addconnections(response?.data?.data));
         } catch (error) {
