@@ -57,6 +57,7 @@ const SignUp = () => {
         try {
             formData.age = parseInt(formData.age)
             formData.photoUrl = formData.photoUrl ? formData.photoUrl : DEFAULT_PROFILE_PICTURE
+            formData.gender = formData.gender.toLowerCase();
             const response = await axios.post(`${BASE_URL}/auth/signup`, formData, { withCredentials: true });
 
             dispatch(addUser(response.data));
