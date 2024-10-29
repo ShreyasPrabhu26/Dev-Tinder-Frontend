@@ -2,8 +2,10 @@ import axios from 'axios';
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom';
-import { BASE_URL } from '../utils/constants';
 import { removeUser } from '../redux/slices/userSlice';
+
+import { BASE_URL } from '../utils/constants';
+import Logo from "/Logo.png"
 
 const NavBar = () => {
     const navigator = useNavigate();
@@ -22,9 +24,10 @@ const NavBar = () => {
 
     return (
         <div className="navbar bg-base-300">
-            <div className="flex-1">
-                <Link to="/" className="btn btn-ghost text-xl">Dev Tinder</Link>
-            </div>
+            <Link to="/" className="flex-1 gap-3">
+                <img src={Logo} alt="Dev Tinder" className='w-16 object-cover rounded-sm' />
+                <strong className="text-xl">Dev Tinder</strong>
+            </Link>
             {user ?
                 <div className="flex-none gap-2">
                     <div className="dropdown dropdown-end flex items-center gap-4">
