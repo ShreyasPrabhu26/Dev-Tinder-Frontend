@@ -41,7 +41,7 @@ const Feed = () => {
                 <Loader />
             ) : (
                 feed?.length ? (
-                    feed.map((user) => <UserCard key={user._id} user={user} />)
+                    <UserCard key={feed[0]._id} user={feed[0]} />
                 ) : (
                     <p>No feed available</p>
                 )

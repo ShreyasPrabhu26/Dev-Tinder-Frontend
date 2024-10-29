@@ -27,11 +27,12 @@ const UserCard = ({ user, isProfileEdit = false }) => {
 
 
     return (
-        <div className="card bg-base-100 w-96 shadow-xl mx-auto">
+        <div className="card bg-base-100 w-96 shadow-xl mx-auto my-12 border-2 p-2 border-emerald-500">
             <figure>
                 <img
                     src={photoUrl}
                     alt={fullName}
+                    className='h-40 w-44 object-contain'
                 />
             </figure>
             <div className="card-body flex items-center justify-center">
