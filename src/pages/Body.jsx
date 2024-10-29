@@ -21,6 +21,7 @@ const Body = () => {
                 { withCredentials: true }
             )
             dispatch(addUser(user.data));
+            navigate("/feed");
         } catch (error) {
             if (error.status === 401) {
                 navigate("/signup");
