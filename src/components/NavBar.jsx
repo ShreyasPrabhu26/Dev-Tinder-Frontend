@@ -30,6 +30,7 @@ const NavBar = () => {
             </Link>
             {user ?
                 <div className="flex-none gap-2">
+                    <button className="btn space-x-20" onClick={navigator("/feed")}>Feed</button>
                     <div className="dropdown dropdown-end flex items-center gap-4">
                         <p>Welcome, {user.firstName}</p>
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
