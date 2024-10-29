@@ -12,8 +12,8 @@ const Login = () => {
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
-        emailId: "shreyas26@gmail.com",
-        password: 'password'
+        emailId: "",
+        password: ''
     });
 
     const dispatch = useDispatch();
