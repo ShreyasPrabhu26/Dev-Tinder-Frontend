@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
@@ -12,6 +12,7 @@ import { addUser } from '../redux/slices/userSlice'
 const Body = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
     const userData = useSelector((store) => store.user);
 
     const fetchUser = async () => {
@@ -21,7 +22,9 @@ const Body = () => {
                 { withCredentials: true }
             )
             dispatch(addUser(user.data));
-            navigate("/feed");
+            if (location.pathname === '/') {
+                navigate("/feed");
+            }
         } catch (error) {
             if (error.status === 401) {
                 navigate("/signup");
